@@ -1,0 +1,39 @@
+{% extends 'music/base.html' %}
+{% block title %} Song Details {% endblock %}
+
+
+
+{% block body %}
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-xs-6 col-md-3">
+            <div class = "thumbnail">
+                <img src = "{{ album.album_logo.url }}">
+                <div class = "caption">
+                    <h3>{{ album.album_title }}</h3>
+                    <p> {{ album.artist }} </p>
+                </div>
+            </div>
+        </div>
+
+        <div class = "col-xs-6 col-md-8" >
+            <button type = "button" class = "btn btn-primary">View All</button>
+            &nbsp;<a href = "#">Add Songs</a>
+            <div class = "thumbnail">
+                <div class = "container">
+                    <h3>All Songs</h3>
+                    <ul class = "list-inline">
+                        <li class = "col-xs-2">Title</li>
+                        <li class = "col-xs-2">Audio File</li>
+                        <li class = "col-xs-2">Favorite</li>
+                        <li class = "col-xs-2">Actions</li>
+                    </ul>
+                </div>
+                <hr size="20">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

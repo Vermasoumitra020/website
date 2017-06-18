@@ -1,0 +1,52 @@
+{% extends 'music/base.html' %}
+{% block title %} Musicfy {% endblock %}
+
+
+{% block body %}
+
+    {% if all_albums %}
+        <h1 class = "text-center"> All the Albums </h1>
+        <hr>
+            <div class = "row" >
+                {% for album in all_albums %}
+                       <div class="col-sm-6 col-md-4">
+                           <div class="thumbnail">
+                               <img src="{{ album.album_logo.url }}">
+                                    <div class="caption">
+                                        <h3>
+                                            {{ album.album_title }}
+                                        </h3>
+                                            <p>
+                                                {{ album.artist }}
+                                            </p>
+
+                                            <a href="{% url 'music:details' album.id %}" class="btn btn-primary" role="button">View Details</a>
+                                            <form action = "{% url 'music:album-delete' album.id %}" method="post" style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type = "hidden" name = "album-id" value = "{{ album.id }}">
+                                                <button type="submit" class = "btn btn-default btn-sm">
+                                                    <span class = "glyphicon glyphicon-trash"></span>
+                                                </button>
+                                            </form>
+                                            <a href="#" class = "btn btn-default btn-sm btn-favorite">
+                                                <span class = "glyphicon glyphicon-star{% if album.is_favorite %} active {% endif %}"></span>
+                                            </a>
+                                            <form action = "{% url 'music:album-update' album.id %}" method="post" style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type = "hidden" name = "album-id" value = "{{ album.id }}">
+                                                <button type="submit" class = "btn btn-default btn-sm">
+                                                    <span class = "glyphicon glyphicon-edit"></span>
+                                                </button>
+                                            </form>
+
+                                    </div>
+                           </div>
+                       </div>
+                {% endfor %}
+            </div>
+    {% endif %}
+    {% if not all_albums %}
+        <h1 style="text-align: center"><small>There are no albums in the list</small></h1>
+    {% endif %}
+
+{% endblock %}
